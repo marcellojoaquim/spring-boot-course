@@ -175,6 +175,24 @@ Exemplo:
 ### GET(/products/{id})
 Este metodo retorna o Produto correspondente ao id informado no endpoint, se existir.
 
+### POST(/products)
+Este metodo salva um novo produto no banco de dados.
+Exemplo:
+{
+    "name": "Novo Produto com duas CAT",
+    "descrption": "Teste de insercao de Novo produto duas CAT",
+    "price": 3000.0,
+    "imgUrl": "",
+    "categories": [
+        {
+            "id": 4
+        },
+        {
+            "id": 5
+        }
+    ]
+}
+
 
 # Tecnologias utilizadas
 - Java 17
