@@ -1,5 +1,6 @@
 package com.projectspring.course.entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -23,6 +24,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable{
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	
@@ -77,8 +79,9 @@ public class Order implements Serializable{
 	}
 
 	public void setOrderStatus(OrderStatus orderStatus) {
-		if(orderStatus != null)
-		this.orderStatus = orderStatus.getCode();
+		if(orderStatus != null) {
+            this.orderStatus = orderStatus.getCode();
+        }
 	}
 
 	public User getClient() {
