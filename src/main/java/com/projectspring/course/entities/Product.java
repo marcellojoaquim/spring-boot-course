@@ -1,5 +1,6 @@
 package com.projectspring.course.entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -20,6 +21,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_product")
 public class Product implements Serializable{
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	
@@ -27,7 +29,7 @@ public class Product implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private String descrption;
+	private String description;
 	private Double price;
 	private String imgUrl;
 	
@@ -42,11 +44,11 @@ public class Product implements Serializable{
 	
 	public Product() {}
 
-	public Product(Long id, String name, String descrption, Double price, String imgUrl) {
+	public Product(Long id, String name, String description, Double price, String imgUrl) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.descrption = descrption;
+		this.description = description;
 		this.price = price;
 		this.imgUrl = imgUrl;
 	}
@@ -67,12 +69,12 @@ public class Product implements Serializable{
 		this.name = name;
 	}
 
-	public String getDescrption() {
-		return descrption;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescrption(String descrption) {
-		this.descrption = descrption;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Double getPrice() {
