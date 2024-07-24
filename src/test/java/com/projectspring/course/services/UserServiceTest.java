@@ -56,7 +56,7 @@ class UserServiceTest {
     }
 
     @Test
-    void testFindAllUsersEmptyList(){
+    void testFindAllUsersEmptyList() {
         given(repository.findAll()).willReturn(Collections.emptyList());
         List<User> userList = service.findAll();
 
@@ -73,16 +73,18 @@ class UserServiceTest {
     }
 
     @Test
-    void testUserFindByIdNotFounded(){
+    void testUserFindByIdNotFounded() {
         var expectedMessage = "Resource not found. Id ";
         u1.setId(1L);
 
         given(repository.findById(anyLong())).willReturn(Optional.empty());
 
         ResourceNotFoundException actual = assertThrows(ResourceNotFoundException.class,
-                ()-> {service.findById(1L);});
+                () -> {
+                    service.findById(1L);
+                });
 
-        assertEquals(expectedMessage+u1.getId(), actual.getMessage());
+        assertEquals(expectedMessage + u1.getId(), actual.getMessage());
         verify(repository, times(1)).findById(1L);
     }
 
@@ -109,15 +111,17 @@ class UserServiceTest {
     }
 
     @Test
-    void testDeleteUserResourceNotFoundException(){
+    void testDeleteUserResourceNotFoundException() {
         var expectedMessage = "Resource not found. Id ";
         u1.setId(1L);
 
         given(repository.existsById(anyLong())).willReturn(false);
         ResourceNotFoundException actual = assertThrows(ResourceNotFoundException.class,
-                () -> {service.delete(u1.getId());});
+                () -> {
+                    service.delete(u1.getId());
+                });
 
-        assertEquals(expectedMessage+u1.getId(), actual.getMessage());
+        assertEquals(expectedMessage + u1.getId(), actual.getMessage());
         verify(repository, times(1)).existsById(1L);
         verify(repository, times(0)).deleteById(1L);
     }
@@ -144,15 +148,17 @@ class UserServiceTest {
     }
 
     @Test
-    void testUpdateUserResourceNotFoundException(){
+    void testUpdateUserResourceNotFoundException() {
         var expectedMessage = "Resource not found. Id ";
         u1.setId(1L);
 
         given(repository.getReferenceById(anyLong())).willThrow(EntityNotFoundException.class);
 
         ResourceNotFoundException actual = assertThrows(ResourceNotFoundException.class,
-                () -> {service.update(1L, u1);});
+                () -> {
+                    service.update(1L, u1);
+                });
 
-        assertEquals(expectedMessage+u1.getId(), actual.getMessage());
+        assertEquals(expectedMessage + u1.getId(), actual.getMessage());
     }
 }
