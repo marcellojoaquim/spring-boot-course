@@ -158,5 +158,5 @@ public class ProductServiceTest {
 		verify(repository, times(1)).getReferenceById(anyLong());
 	}
 
-	
+
 }
