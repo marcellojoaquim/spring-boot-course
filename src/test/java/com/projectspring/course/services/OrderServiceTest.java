@@ -42,16 +42,15 @@ class OrderServiceTest {
             Instant.parse("2019-06-20T19:53:07Z"),
             OrderStatus.PAID,
             u1);
-
-        order1 = new Order(
-            null,
-            Instant.parse("2019-07-22T15:21:22Z"),
-            OrderStatus.WAITING_PAYMENT,
-            u1);
     }
 
     @Test
     void findAll() {
+        order1 = new Order(
+                null,
+                Instant.parse("2019-07-22T15:21:22Z"),
+                OrderStatus.WAITING_PAYMENT,
+                u1);
         given(repository.findAll()).willReturn(List.of(order, order1));
 
         List<Order> orderList = service.findAll();

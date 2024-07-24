@@ -2,6 +2,7 @@ package com.projectspring.course.services;
 
 import com.projectspring.course.entities.User;
 import com.projectspring.course.repositories.UserRepository;
+import com.projectspring.course.services.exceptions.DatabaseException;
 import com.projectspring.course.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.dao.DataIntegrityViolationException;
 
 
 import java.util.Collections;
@@ -160,5 +162,17 @@ class UserServiceTest {
                 });
 
         assertEquals(expectedMessage + u1.getId(), actual.getMessage());
+    }
+
+    @Test
+    public void testDeleteUser_DataIntegrityViolationException() {
+        u1.setId(3L);
+
+        given(repository.existsById(u1.getId())).willReturn(true);
+        doThrow(DataIntegrityViolationException.class).when(repository).deleteById(u1.getId());
+
+        assertThrows(DatabaseException.class, () -> service.delete(u1.getId()));
+
+        verify(repository, times(1)).existsById(u1.getId());
     }
 }
