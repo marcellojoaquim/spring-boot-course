@@ -1,5 +1,6 @@
 package com.projectspring.course.entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,6 +14,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable{
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
@@ -43,7 +46,7 @@ public class OrderItem implements Serializable{
 		return id.getProduct();
 	}
 	
-	public void setProdut(Product product) {
+	public void setProduct(Product product) {
 		id.setProduct(product);
 	}
 	

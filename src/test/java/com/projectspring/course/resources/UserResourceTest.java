@@ -81,8 +81,8 @@ class UserResourceTest {
 
         mockMvc.perform(get("/users/{id}", id))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Maria Brown"))
-                .andExpect(jsonPath("$.email").value("maria@gmail.com"));
+                .andExpect(jsonPath("$.name").value(user.getName()))
+                .andExpect(jsonPath("$.email").value(user.getEmail()));
         verify(service, times(1)).findById(id);
     }
 

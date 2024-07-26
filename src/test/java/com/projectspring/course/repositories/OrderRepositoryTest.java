@@ -1,6 +1,5 @@
 package com.projectspring.course.repositories;
 
-import com.projectspring.course.entities.Category;
 import com.projectspring.course.entities.Order;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

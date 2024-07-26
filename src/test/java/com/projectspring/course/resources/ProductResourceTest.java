@@ -1,8 +1,6 @@
 package com.projectspring.course.resources;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.projectspring.course.entities.Category;
 import com.projectspring.course.entities.Product;
 import com.projectspring.course.services.ProductService;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +18,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.willDoNothing;
@@ -51,7 +48,7 @@ class ProductResourceTest {
                 "Smart TV",
                 "Nulla eu imperdiet purus. Maecenas ante.",
                 2190.0,
-                "");
+                "urltest.com");
     }
 
     @Test
@@ -124,7 +121,7 @@ class ProductResourceTest {
                 "Macbook Pro",
                 "Nam eleifend maximus tortor, at mollis.",
                 1250.0,
-                "");
+                "urltest.com");
 
         given(service.findById(pId)).willReturn(Optional.of(product));
         given(service.update(pId, product)).willReturn(updatedProduct);
@@ -136,6 +133,7 @@ class ProductResourceTest {
         response.andExpect(status().isOk())
                 .andExpect((ResultMatcher) jsonPath("$.name", is(updatedProduct.getName())))
                 .andExpect(jsonPath("$.price").value(1250.0))
+                .andExpect(jsonPath("$.imgUrl").value(product.getImgUrl()))
                 .andExpect((ResultMatcher) jsonPath("$.description", is(updatedProduct.getDescription())));
     }
 }

@@ -19,12 +19,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.hamcrest.CoreMatchers.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(OrderResource.class)
@@ -69,7 +66,7 @@ class OrderResourceTest {
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].orderStatus").value(OrderStatus.PAID.toString()))
-                .andExpect(jsonPath("$[0].client.name").value("Maria Brown"))
+                .andExpect(jsonPath("$[0].client.name").value(orderList.get(0).getClient().getName()))
                 .andExpect(jsonPath("$[1].id").exists())
                 .andExpect(jsonPath("$[1].orderStatus").value(OrderStatus.SHIPPED.toString()))
                 .andExpect((ResultMatcher) jsonPath("$.size()", is(orderList.size())));
